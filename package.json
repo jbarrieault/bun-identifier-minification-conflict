@@ -1,0 +1,17 @@
+{
+  "name": "bun-identifier-minification-conflict",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bun bun.config.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@planningcenter/tapestry-react": "^4.9.0"
+  }
+}
