@@ -9,6 +9,8 @@ In the actual app I discovered the issue in, the error had a slightly different 
 
 Turning on identifier minifcation resolves the issue.
 
+I've reproduced on Bun 1.2.1 and 1.2.2, haven't tried any others.
+
 The package that deterministically fails with the identifier minifaction is controller by the company I work for, so if there is something its end contributing to the issue, we can address it.
 
 If it's solely a Bun bundling issue, thanks in advance for addressing.
