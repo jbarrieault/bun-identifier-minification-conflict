@@ -2,12 +2,11 @@
 
 I ran into a problem producing a bundle targeting browsers.
 
-The issue only occurs when the build command is configured with `minify` `identifiers: true`.
+The occurs when the build command is configured with `minify` `identifiers: false`. The other `minify` properties can be disabled just fine.
 
 The result is a successful build that fails at runtime within a specific imported package with an error `Type d is not a function`.
-In the actual app I discovered the issue in, the error had a slightly different token, `d3`.
 
-Turning on identifier minifcation resolves the issue.
+Turning _on_ identifier minifcation resolves the issue.
 
 I've reproduced on Bun 1.2.1 and 1.2.2, haven't tried any others.
 
