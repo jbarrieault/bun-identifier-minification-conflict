@@ -24,6 +24,6 @@ Or using your browser's JS runtime:
 - `bun ./index.bundled.html`
 
 # Observations
-The bundle, `dist/index.js` has a flattened scope—identifiers from all imported module files live at the top-level. Perhaps that's a strategy Bun has good reason for. But it appears `foo.js`'s `var d` promotion to the top-level scope is not noticed when transforming `bar.js`. Thus, the resulting identifier collision.
+The bundle, `dist/index.js` has a flattened scope—identifiers from all imported module files live at the top-level. Perhaps that's a strategy Bun has good reason for. But it appears `foo.js`'s `var d` [promotion](https://github.com/jbarrieault/bun-identifier-minification-conflict/blob/main/dist/index.js#L14) to the top-level scope is not noticed when transforming `bar.js`. Thus, the resulting identifier collision.
 
 This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
