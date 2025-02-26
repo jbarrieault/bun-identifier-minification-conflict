@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bun Static Page</title>
+
+    <!-- works: `var d` from foo.js module stays module-scoped -->
+    <!-- <script type="text/javascript" src="./index.js" type="module"></script> -->
+
+    <!-- 💥! `var d` is at the top-level, module-scoped `function d` collides -->
     <script type="text/javascript" src="./dist/index.js"></script>
 </head>
 <body>

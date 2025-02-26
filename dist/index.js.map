@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "sources": ["../foo.js", "../bar.js", "../index.js"],
+  "sourcesContent": [
+    "var c = !1;\nif (\"undefined\" != typeof window) try {\n    // Bun.build() output declares this on the top-level scope,\n    // and does not detect the identifier is taken when bundling bar.js\n    var d = {\n        get passive() {\n            return c = !0, !0\n        }\n    };\n    window.addEventListener(\"test\", null, d), window.removeEventListener(\"test\", null, d)\n  } catch (e) {\n    c = !1\n  }\n\nexport function foo() {\n  console.log('foo')\n}\n",
+    "function d() {\n  console.log(\"bar\")\n}\n\nexport function bar() {\n  d()\n}\n",
+    "import { foo } from \"./foo.js\" // `var d`, unexported\nimport { bar } from \"./bar.js\" // `function d`, unexported\n\nfoo()\nbar()\n\nconsole.log(\"Hello via Bun!\");\n"
+  ],
+  "mappings": ";AAAA,IAAI,IAAI;AACR,IAAmB,OAAO,UAAtB;AAAA,EAA8B,IAAI;AAAA,IAG9B,IAAI;AAAA,UACA,OAAO,GAAG;AAAA,QACV,OAAO,IAAI,MAAI;AAAA;AAAA,IAEvB;AAAA,IACA,OAAO,iBAAiB,QAAQ,MAAM,CAAC,GAAG,OAAO,oBAAoB,QAAQ,MAAM,CAAC;AAAA,IACpF,OAAO,GAAG;AAAA,IACV,IAAI;AAAA;AAPA;AAUD,SAAS,GAAG,GAAG;AAAA,EACpB,QAAQ,IAAI,KAAK;AAAA;;;ACfnB,SAAS,CAAC,GAAG;AAAA,EACX,QAAQ,IAAI,KAAK;AAAA;AAGZ,SAAS,GAAG,GAAG;AAAA,EACpB,EAAE;AAAA;;;ACFJ,IAAI;AACJ,IAAI;AAEJ,QAAQ,IAAI,gBAAgB;",
+  "debugId": "5667FAA9E988ED7564756E2164756E21",
+  "names": []
+}

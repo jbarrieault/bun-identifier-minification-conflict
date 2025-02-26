@@ -1,30 +1,23 @@
-# Bun Identifier Minification Conflict
+# Bun Identifier Minification Collisions
 
-I ran into a problem producing a bundle targeting browsers.
+`Bun.build({ minify: false })` is producing output with identifier collisions that error when parsed at runtime:
+`Type d is not a function`
 
-The occurs when the build command is configured with `minify` `identifiers: false`. The other `minify` properties can be disabled just fine.
+Specifically, the issue occurs when setting `minify` with `identifiers: false`. The other `minify` properties can be disabled just fine. Turning _on_ identifier minifcation resolves the issue.
 
-The result is a successful build that fails at runtime within a specific imported package with an error `Type d is not a function`.
-
-Turning _on_ identifier minifcation resolves the issue.
-
-I've reproduced on Bun 1.2.1 and 1.2.2, haven't tried any others.
-
-The package that deterministically fails with the identifier minifaction is controller by the company I work for, so if there is something its end contributing to the issue, we can address it.
-
-If it's solely a Bun bundling issue, thanks in advance for addressing.
+I've reproduced on Bun 1.2.1, 1.2.2, 1.2.4.
 
 # Steps to Reproduce
-`bun install`
-`bun bun.config.js`
-`open ./index.html` (in a browser)
+- Non-bundled, works: `bun index.js`
+- Errors: `bun ./dist/index.js`
 
-Result:
+Or using your browser's JS runtime:
+`bun ./index.unbundled.html`
+`bun ./index.bundled.html`
 
-The JS bundle fails at runtime:
-```
-Uncaught TypeError: d is not a function
-```
+`bun run build` to rebuild the bundle.
 
+# Observations
+The bundle, `dist/index.js` has a flattened scope—identifiers from all imported module files live at the top-level. Perhaps that's a strategy Bun has good reason for. But it appears `foo.js`'s `var d` promotion to the top-level scope is not noticed when transforming `bar.js`. Thus, the resulting identifier collision.
 
 This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.

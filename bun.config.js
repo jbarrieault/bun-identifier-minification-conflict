@@ -4,12 +4,12 @@ import path from 'path'
 (async() => {
   Bun.build({
     sourcemap: 'external',
-    entrypoints: ['index.ts'],
+    entrypoints: ['index.js'],
     outdir: path.resolve('dist'),
     minify: {
       identifiers: false,
-      whitespace: true,
-      syntax: true,
+      whitespace: false ,
+      syntax: false,
     },
   })
 })()
